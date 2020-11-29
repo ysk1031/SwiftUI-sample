@@ -66,9 +66,17 @@ final class HomeViewModel: ObservableObject {
             .map { _ in true }
             .assign(to: \.isLoading, on: self)
         
+        let errorSubscriber = errorSubject
+            .sink { [weak self] error in
+                guard let self = self else { return }
+                self.isShowError = true
+                self.isLoading = false
+            }
+        
         cancellables += [
             responseSubscriber,
-            loadingStartSubscriber
+            loadingStartSubscriber,
+            errorSubscriber
         ]
     }
     

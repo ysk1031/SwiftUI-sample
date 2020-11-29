@@ -46,6 +46,9 @@ struct HomeView: View {
                 .sheet(isPresented: $viewModel.isShowSheet) {
                     SafariView(url: URL(string: viewModel.repositoryURL)!)
                 }
+                .alert(isPresented: $viewModel.isShowError) {
+                    Alert(title: Text("通信時にエラーが発生しました。もう一度やり直してください"))
+                }
             }
         }
     }
