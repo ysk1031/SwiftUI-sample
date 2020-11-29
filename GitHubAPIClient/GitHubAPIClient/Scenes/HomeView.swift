@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var cardViewInputs: [CardView.Input] = []
     @State private var text: String = ""
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: true) {
-                Text("Placeholder")
+                ForEach(cardViewInputs) { input in
+                    Button(action: {
+                    }) {
+                        CardView(input: input)
+                    }
+                }
             }
             .padding()
             .navigationBarTitle("", displayMode: .inline)
