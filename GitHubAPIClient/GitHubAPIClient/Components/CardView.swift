@@ -22,7 +22,7 @@ struct CardView: View {
     let input: Input
     
     var body: some View {
-        VStack(
+        LazyVStack(
             alignment: .leading,
             spacing: 8.0
         ) {
@@ -40,12 +40,12 @@ struct CardView: View {
                 .font(.title)
                 .fontWeight(.bold)
 
-            HStack {
+            LazyHStack {
                 Text(input.language ?? "")
                     .font(.footnote)
                     .foregroundColor(.gray)
                 Spacer()
-                HStack(spacing: 4) {
+                LazyHStack(spacing: 4) {
                     Image(systemName: "star")
                         .renderingMode(.template)
                         .foregroundColor(.gray)
