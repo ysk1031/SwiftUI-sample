@@ -21,4 +21,8 @@ struct SearchRepositoryRequest: APIRequestType {
     }
     
     private let query: String
+    
+    init(query: String) {
+        self.query = query
+    }
 }

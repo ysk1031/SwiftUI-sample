@@ -8,32 +8,42 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var cardViewInputs: [CardView.Input] = []
+    @StateObject private var viewModel = HomeViewModel(apiService: APIService())
     @State private var text: String = ""
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: true) {
-                ForEach(cardViewInputs) { input in
-                    Button(action: {
-                    }) {
-                        CardView(input: input)
+        if viewModel.isLoading {
+            Text("読み込み中...")
+                .font(.headline)
+                .foregroundColor(.gray)
+                .offset(x: 0, y: -200)
+                .navigationBarTitle("", displayMode: .inline)
+        } else {
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: true) {
+                    ForEach(viewModel.cardViewInputs) { input in
+                        Button(action: {
+                            viewModel.apply(inputs: .tappedCardView(urlString: input.url))
+                        }) {
+                            CardView(input: input)
+                        }
                     }
                 }
+                .padding()
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(leading: HStack {
+                    TextField(
+                        "検索キーワードを入力",
+                        text: $text
+                    ) { _ in
+                    } onCommit: {
+                        viewModel.apply(inputs: .onCommit(text: text))
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.asciiCapable)
+                    .frame(width: UIScreen.main.bounds.width - 40)
+                })
             }
-            .padding()
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading: HStack {
-                TextField(
-                    "検索キーワードを入力",
-                    text: $text
-                ) { _ in
-                } onCommit: {
-                }
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.asciiCapable)
-                .frame(width: UIScreen.main.bounds.width - 40)
-            })
         }
     }
 }
