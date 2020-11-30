@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 @main
 struct TodoReminderApp: App {
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onChange(of: scenePhase, perform: { newScenePhase in
+                    if newScenePhase == .active {
+                        WidgetCenter.shared.reloadTimelines(ofKind: "TodoReminderWidget")
+                    }
+                })
         }
     }
 }

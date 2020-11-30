@@ -54,6 +54,12 @@ final class TodoListStore {
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: TodoListStore.containerName)
+        container.persistentStoreDescriptions = [
+            NSPersistentStoreDescription(
+                url: FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.io.github.ysk1031.TodoReminder")!
+                    .appendingPathComponent("\(TodoListStore.containerName).sqlite")
+            )
+        ]
         container.loadPersistentStores { description, error in
             if let error = error as NSError? {
                 print("Unresolved error \(error), \(error.userInfo)")
@@ -73,6 +79,31 @@ final class TodoListStore {
         } catch let error {
             throw error
         }
+    }
+    
+    func fetchTodayItems() throws -> [TodoListItem] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: TodoListStore.entityName)
+        fetchRequest.predicate = makeTodayItemsPredicate()
+        do {
+            guard let result = try persistentContainer.viewContext.fetch(fetchRequest) as? [Entity] else {
+                throw CoreDataStoreError.failureFetch
+            }
+            let todoList: [TodoListItem] = result.compactMap { $0.convert() }
+            return todoList
+        } catch let error {
+            throw error
+        }
+    }
+    
+    private func makeTodayItemsPredicate() -> NSPredicate {
+        let now = Date()
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: now)
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        let endDate = calendar.date(from: components)!
+        return NSPredicate(format: "startDate >= %@ and startDate =< %@", argumentArray: [now, endDate])
     }
 }
 

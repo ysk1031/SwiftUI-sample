@@ -8,41 +8,22 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
-    }
-
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
-    }
-
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
-    }
-}
-
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-}
-
-struct TodoReminderWidgetEntryView : View {
+struct TodoReminderWidgetEntryView : View, TodoReminderWidgetType {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            Rectangle()
+                .foregroundColor(makePriorityColor(priority: entry.priority))
+                .clipShape(ContainerRelativeShape())
+                .overlay(Text(entry.title).font(.title).foregroundColor(.white))
+            VStack(alignment: .trailing) {
+                Text(entry.date, style: .date).font(.caption)
+                Text(entry.date, style: .time).font(.caption)
+            }
+        }
+        .padding(8)
+        .widgetURL(makeURLScheme(id: entry.id))
     }
 }
 
@@ -54,14 +35,16 @@ struct TodoReminderWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             TodoReminderWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Todo Reminder")
+        .description("直近のTodoListをお知らせします")
+        .supportedFamilies([.systemSmall])
     }
 }
 
 struct TodoReminderWidget_Previews: PreviewProvider {
     static var previews: some View {
-        TodoReminderWidgetEntryView(entry: SimpleEntry(date: Date()))
+        let dummyEntry = RecentTodoEntry(date: Date(), title: "dummy title", priority: .low, id: UUID())
+        return TodoReminderWidgetEntryView(entry: dummyEntry)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

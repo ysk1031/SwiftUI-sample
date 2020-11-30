@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		701B149225750FD900B578BE /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70D5D2AA2573D7E6001B1FBE /* Todo.xcdatamodeld */; };
+		701B149525750FDB00B578BE /* TodoListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5D2AE2573D932001B1FBE /* TodoListStore.swift */; };
+		701B14A02575199C00B578BE /* TodoReminderWidgetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B14982575185200B578BE /* TodoReminderWidgetType.swift */; };
+		701B14A925751B6D00B578BE /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B14A325751B6600B578BE /* Provider.swift */; };
+		701B14AD25751BAC00B578BE /* RecentTodoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B14AC25751BAC00B578BE /* RecentTodoEntry.swift */; };
 		70D5D29A2573D5F8001B1FBE /* TodoReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5D2992573D5F8001B1FBE /* TodoReminderApp.swift */; };
 		70D5D29C2573D5F8001B1FBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5D29B2573D5F8001B1FBE /* ContentView.swift */; };
 		70D5D29E2573D5F9001B1FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D5D29D2573D5F9001B1FBE /* Assets.xcassets */; };
@@ -45,6 +50,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		701B148C25750E6F00B578BE /* TodoReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoReminder.entitlements; sourceTree = "<group>"; };
+		701B148F25750EC600B578BE /* TodoReminderWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoReminderWidgetExtension.entitlements; sourceTree = "<group>"; };
+		701B14982575185200B578BE /* TodoReminderWidgetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoReminderWidgetType.swift; sourceTree = "<group>"; };
+		701B14A325751B6600B578BE /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		701B14AC25751BAC00B578BE /* RecentTodoEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTodoEntry.swift; sourceTree = "<group>"; };
 		70D5D2962573D5F8001B1FBE /* TodoReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D5D2992573D5F8001B1FBE /* TodoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoReminderApp.swift; sourceTree = "<group>"; };
 		70D5D29B2573D5F8001B1FBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +94,7 @@
 		70D5D28D2573D5F8001B1FBE = {
 			isa = PBXGroup;
 			children = (
+				701B148F25750EC600B578BE /* TodoReminderWidgetExtension.entitlements */,
 				70D5D2982573D5F8001B1FBE /* TodoReminder */,
 				70D5D2BB2573DF0C001B1FBE /* TodoReminderWidget */,
 				70D5D2B62573DF0C001B1FBE /* Frameworks */,
@@ -103,6 +114,7 @@
 		70D5D2982573D5F8001B1FBE /* TodoReminder */ = {
 			isa = PBXGroup;
 			children = (
+				701B148C25750E6F00B578BE /* TodoReminder.entitlements */,
 				70D5D2A22573D5F9001B1FBE /* Info.plist */,
 				70D5D29B2573D5F8001B1FBE /* ContentView.swift */,
 				70D5D2992573D5F8001B1FBE /* TodoReminderApp.swift */,
@@ -142,9 +154,12 @@
 		70D5D2BB2573DF0C001B1FBE /* TodoReminderWidget */ = {
 			isa = PBXGroup;
 			children = (
-				70D5D2BC2573DF0C001B1FBE /* TodoReminderWidget.swift */,
-				70D5D2BE2573DF0C001B1FBE /* Assets.xcassets */,
 				70D5D2C02573DF0D001B1FBE /* Info.plist */,
+				701B14A325751B6600B578BE /* Provider.swift */,
+				701B14AC25751BAC00B578BE /* RecentTodoEntry.swift */,
+				70D5D2BC2573DF0C001B1FBE /* TodoReminderWidget.swift */,
+				701B14982575185200B578BE /* TodoReminderWidgetType.swift */,
+				70D5D2BE2573DF0C001B1FBE /* Assets.xcassets */,
 			);
 			path = TodoReminderWidget;
 			sourceTree = "<group>";
@@ -260,7 +275,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				701B149525750FDB00B578BE /* TodoListStore.swift in Sources */,
+				701B14A02575199C00B578BE /* TodoReminderWidgetType.swift in Sources */,
 				70D5D2BD2573DF0C001B1FBE /* TodoReminderWidget.swift in Sources */,
+				701B14A925751B6D00B578BE /* Provider.swift in Sources */,
+				701B149225750FD900B578BE /* Todo.xcdatamodeld in Sources */,
+				701B14AD25751BAC00B578BE /* RecentTodoEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +417,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TodoReminder/TodoReminder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoReminder/Preview Content\"";
 				DEVELOPMENT_TEAM = 8C9TZF26K4;
@@ -420,6 +441,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TodoReminder/TodoReminder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoReminder/Preview Content\"";
 				DEVELOPMENT_TEAM = 8C9TZF26K4;
@@ -442,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TodoReminderWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8C9TZF26K4;
 				INFOPLIST_FILE = TodoReminderWidget/Info.plist;
@@ -463,6 +486,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = TodoReminderWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8C9TZF26K4;
 				INFOPLIST_FILE = TodoReminderWidget/Info.plist;
