@@ -14,7 +14,7 @@ struct TodoReminderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TodoListView()
                 .onChange(of: scenePhase, perform: { newScenePhase in
                     if newScenePhase == .active {
                         WidgetCenter.shared.reloadTimelines(ofKind: "TodoReminderWidget")

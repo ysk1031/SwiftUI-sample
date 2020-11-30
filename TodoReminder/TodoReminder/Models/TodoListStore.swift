@@ -68,6 +68,19 @@ final class TodoListStore {
         return container
     }()
     
+    func insert(item: TodoListItem) throws {
+        let newItem = NSEntityDescription.insertNewObject(
+            forEntityName: TodoListStore.entityName,
+            into: persistentContainer.viewContext
+        ) as? Entity
+        newItem?.startDate = item.startDate
+        newItem?.note = item.note
+        newItem?.priority = Int32(item.priority.rawValue)
+        newItem?.title = item.title
+        newItem?.id = item.id
+        try saveContext()
+    }
+    
     func fetchAll() throws -> [TodoListItem] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: TodoListStore.entityName)
         do {
@@ -104,6 +117,19 @@ final class TodoListStore {
         components.second = 59
         let endDate = calendar.date(from: components)!
         return NSPredicate(format: "startDate >= %@ and startDate =< %@", argumentArray: [now, endDate])
+    }
+    
+    private func saveContext() throws {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                throw nserror
+            }
+        }
     }
 }
 
